@@ -1,0 +1,11 @@
+Flask==2.0.3
+telebot==0.0.4
+pyTelegramBotAPI==3.8.3
+gunicorn==19.9.0
+Werkzeug==2.2.2
+python-dotenv==1.0.1
+numpy==1.23.1
+requests==2.31.0
+statsmodels==0.13.5
+
+

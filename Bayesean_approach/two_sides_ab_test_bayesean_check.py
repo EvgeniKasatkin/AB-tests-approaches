@@ -13,18 +13,14 @@ class BayesianExpectedError:
         self.samples_list = samples_list
         self.conversions_list = conversions_list
 
-    def test(self):
+    def posterior_distributions(self):
         posterios = []
         length_of_prior_params = len(self.prior_params)
         for ind_ in range(length_of_prior_params):
             posterios.append(beta(self.prior_params[ind_][0] + self.conversions_list[ind_] - 1, self.prior_params[ind_][1] + self.samples_list[ind_] - self.conversions_list[ind_] - 1))
-
         return posterios
 
 
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     prior_params = [(1,1), (1,1)]
     #Params of beta distributions B(1,1) for test and control group identicaly equal U(0,1)
@@ -32,8 +28,6 @@ if __name__ == '__main__':
     #Example of threshold
     xgrid_size = 1024
     #XGRID
-
-
 
     print("Input number of samples in Group A:")
     samples_a = input()
@@ -48,7 +42,7 @@ if __name__ == '__main__':
     samples_list = np.array([int(samples_a), int(samples_b)])
     conversions_list = np.array([int(conversions_a), int(conversions_b)])
 
-    posterios_distributions = BayesianExpectedError(prior_params, samples_list, conversions_list).test()
+    posterios_distributions = BayesianExpectedError(prior_params, samples_list, conversions_list).posterior_distributions()
 
     x = np.mgrid[0:xgrid_size, 0:xgrid_size] / float(xgrid_size)
     pdf_arr = posterios_distributions[0].pdf(x[1]) * posterios_distributions[1].pdf(x[0])
